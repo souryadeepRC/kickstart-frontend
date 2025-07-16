@@ -1,0 +1,40 @@
+{
+  "name": "kickstart-frontend",
+  "version": "1.0.2",
+  "description": "A CLI tool to scaffold customizable React component structures.",
+  "type": "commonjs",
+  "main": "index.js",
+  "bin": {
+    "create-react-component": "./bin/component-cli.js",
+    "crc": "./bin/component-cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/component-cli.js",
+    "dev": "nodemon ./bin/component-cli.js",
+    "test": "jest --coverage",
+    "publish-dev": "npm pack --dry-run"
+  },
+  "keywords": [
+    "cli",
+    "react",
+    "component-generator",
+    "scaffolding",
+    "nodejs",
+    "kickstart"
+  ],
+  "author": "Souryadeep Roy Chowdhury",
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^7.6.0",
+    "boxen": "^8.0.1",
+    "chalk": "^4.1.2",
+    "figlet": "^1.8.2",
+    "inquirer": "^12.7.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "mock-fs": "^5.5.0",
+    "nodemon": "^3.1.10"
+  }
+}
