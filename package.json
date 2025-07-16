@@ -8,11 +8,18 @@
     "create-react-component": "./bin/component-cli.js",
     "crc": "./bin/component-cli.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/souryadeepRC/kickstart-frontend.git"
+  },
   "scripts": {
     "start": "node ./bin/component-cli.js",
     "dev": "nodemon ./bin/component-cli.js",
     "test": "jest --coverage",
-    "publish-dev": "npm pack --dry-run"
+    "publish-dev": "npm pack --dry-run",
+    "deploy:major": "npm version major && npm publish",
+    "deploy:minor": "npm version minor && npm publish",
+    "deploy:patch": "npm version patch && npm publish"
   },
   "keywords": [
     "cli",
