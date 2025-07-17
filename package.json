@@ -5,8 +5,8 @@
   "type": "commonjs",
   "main": "index.js",
   "bin": {
-    "create-react-component": "./bin/component-cli.js",
-    "crc": "./bin/component-cli.js"
+    "create-react-component": "./bin/react-component-cli.js",
+    "crc": "./bin/react-component-cli.js"
   },
   "repository": {
     "type": "git",

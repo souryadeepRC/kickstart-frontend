@@ -1,22 +1,33 @@
 const fs = require("fs");
 const path = require("path");
-const { createComponent } = require("../lib/createComponent");
-const { modifyStyleImport, createStyleFile } = require("../lib/modifyStyleIntegration");
+const {
+  modifyStyleImport,
+  createStyleFile,
+} = require("../lib/styleIntegration");
+const { createComponentFile } = require("../lib/createComponent");
 
 jest.mock("fs");
-jest.mock("../lib/modifyStyleIntegration");
+jest.mock("../lib/styleIntegration");
 
-describe("createComponent", () => {
-  const mockAnswers = {
-    componentName: "test-component",
-    isTypeScript: false,
-    styles: {
-      wantsStyles: true,
-      styleType: "css"
-    },
-    location: "src/components"
-  };
+const mockAnswers = {
+  componentName: "my-component",
+  isTypeScript: false,
+  styles: {
+    wantsStyles: true,
+    styleType: "css",
+  },
+  location: "src/components",
+};
 
+const mockPascalName = "MyComponent";
+jest.mock("../lib/utils", () => ({
+  convertToPascalCase: jest.fn(() => mockPascalName),
+  collectUserOptions: jest.fn(() => {
+    return Promise.resolve(mockAnswers);
+  }),
+  pause: jest.fn(),
+}));
+describe("createComponentFile", () => {
   const mockTemplate = `
     import React from 'react';
     __STYLE_IMPORT__
@@ -24,7 +35,6 @@ describe("createComponent", () => {
     export default __COMPONENT__;
   `;
 
-  const mockPascalName = "TestComponent";
   const componentDir = path.resolve(
     process.cwd(),
     mockAnswers.location,
@@ -37,36 +47,38 @@ describe("createComponent", () => {
     fs.readFileSync.mockClear();
     fs.writeFileSync.mockClear();
     createStyleFile.mockClear();
-    modifyStyleImport.mockReturnValue("import './TestComponent.css';");
+    modifyStyleImport.mockReturnValue("import './MyComponent.css';");
   });
 
   it("should create the component with correct structure", async () => {
     fs.existsSync.mockReturnValue(false);
     fs.readFileSync.mockReturnValue(mockTemplate);
 
-    const result = await createComponent(mockAnswers);
+    const result = await createComponentFile(mockAnswers);
 
     expect(fs.existsSync).toHaveBeenCalledWith(componentDir);
-    expect(fs.mkdirSync).toHaveBeenCalledWith(componentDir, { recursive: true });
+    expect(fs.mkdirSync).toHaveBeenCalledWith(componentDir, {
+      recursive: true,
+    });
 
     expect(fs.writeFileSync).toHaveBeenCalledWith(
-      path.join(componentDir, "TestComponent.jsx"),
-      expect.stringContaining("TestComponent")
+      path.join(componentDir, "MyComponent.jsx"),
+      expect.stringContaining("MyComponent")
     );
 
     expect(createStyleFile).toHaveBeenCalledWith(
       mockAnswers.styles,
       componentDir,
-      "TestComponent"
+      "MyComponent"
     );
 
-    expect(result).toBe("TestComponent");
+    expect(result).toBe("MyComponent");
   });
 
   it("should throw error if component directory exists", async () => {
     fs.existsSync.mockReturnValue(true);
 
-    await expect(createComponent(mockAnswers)).rejects.toThrow(
+    await expect(createComponentFile(mockAnswers)).rejects.toThrow(
       `Component "${mockPascalName}" already exists at ${componentDir}`
     );
 
@@ -79,10 +91,10 @@ describe("createComponent", () => {
     fs.existsSync.mockReturnValue(false);
     fs.readFileSync.mockReturnValue(mockTemplate);
 
-    await createComponent(tsAnswers);
+    await createComponentFile(tsAnswers);
 
     expect(fs.writeFileSync).toHaveBeenCalledWith(
-      path.join(componentDir, "TestComponent.tsx"),
+      path.join(componentDir, "MyComponent.tsx"),
       expect.any(String)
     );
   });
@@ -91,11 +103,11 @@ describe("createComponent", () => {
     fs.existsSync.mockReturnValue(false);
     fs.readFileSync.mockReturnValue(mockTemplate);
 
-    await createComponent(mockAnswers);
+    await createComponentFile(mockAnswers);
 
     const [filePath, content] = fs.writeFileSync.mock.calls[0];
 
-    expect(content).toContain("TestComponent");
-    expect(content).toContain("import './TestComponent.css';");
+    expect(content).toContain("MyComponent");
+    expect(content).toContain("import './MyComponent.css';");
   });
 });

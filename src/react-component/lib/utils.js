@@ -1,5 +1,5 @@
 const { confirm, input, select } = require("@inquirer/prompts");
-const { StyleTypeOptions, StyleTypeEnum } = require("../lib/StyleEnum");
+const { StyleTypeOptions, StyleTypeEnum } = require("./StyleEnum");
 
 async function collectUserOptions() {
   const componentName = await input({ message: "🧩 Component name:" });
@@ -38,5 +38,18 @@ async function collectUserOptions() {
     },
   };
 }
-
-module.exports = { collectUserOptions };
+/**
+ * Convert a string to PascalCase (e.g. "post-data" => "PostData")
+ */
+function convertToPascalCase(text) {
+  return text
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .trim()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
+}
+function pause(lines = 1) {
+  console.log("\n".repeat(lines));
+}
+module.exports = { collectUserOptions, convertToPascalCase, pause };

@@ -3,7 +3,7 @@ const path = require("path");
 const {
   createStyleFile,
   modifyStyleImport,
-} = require("../lib/modifyStyleIntegration");
+} = require("../lib/styleIntegration");
 
 jest.mock("fs");
 
