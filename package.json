@@ -1,6 +1,6 @@
 {
   "name": "kickstart-frontend",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A CLI tool to scaffold customizable React component structures.",
   "type": "commonjs",
   "main": "index.js",
