@@ -66,8 +66,13 @@ async function runGenerator() {
     process.exit(1);
   }
 }
+if (require.main === module) {
+  (async () => {
+    console.log(chalk.blueBright("======= React Component Generator ======="));
+    printHeader("Component Generator");
+  })();
+}
 
-(async () => {
-  console.log(chalk.blueBright("======= React Component Generator ======="));
-  printHeader("Component Generator");
-})();
+module.exports = {
+  printHeader,
+};
