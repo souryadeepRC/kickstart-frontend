@@ -92,7 +92,7 @@ async function generateReactComponent() {
   } catch (error) {
     ora().fail(chalk.red("❌ Component creation failed"));
     console.error(chalk.red(error));
-    pause()
+    pause();
     process.exit(1);
   }
 }

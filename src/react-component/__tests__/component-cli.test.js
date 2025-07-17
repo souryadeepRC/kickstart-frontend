@@ -1,6 +1,4 @@
-/* const { runGenerator, printHeader } = require("../../../bin/component-cli"); */
 const { createReactCLI } = require("../lib/cli-command");
-/* const { createComponent } = require("../lib/createComponent"); */
 
 jest.mock("chalk", () => {
   const blueBright = jest.fn((text) => `chalk greenBright(${text})`);
@@ -26,15 +24,6 @@ jest.mock("boxen", () => {
   const boxenMock = (text, opts) => `BOXEN: ${text}`;
   boxenMock.default = boxenMock;
   return boxenMock;
-});
-jest.mock("ora", () => {
-  const oraMock = () => ({
-    start: jest.fn().mockReturnThis(),
-    succeed: jest.fn(),
-    fail: jest.fn(),
-  });
-  oraMock.default = oraMock;
-  return oraMock;
 });
 
 jest.mock("../lib/createComponent", () => ({
@@ -77,4 +66,3 @@ describe("createReactCLI", () => {
     expect(exitSpy).toHaveBeenCalledWith(1);
   });
 });
-
