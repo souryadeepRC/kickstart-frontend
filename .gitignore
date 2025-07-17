@@ -1,8 +1,5 @@
 # Ignore dev folders
 coverage
-__tests__
-test
-tests
 
 # Ignore config/dev tools
 jest.config.js
@@ -10,7 +7,6 @@ nodemon.json
 
 # Ignore local files
 *.log
-*.test.js
 
 # Ignore dependencies not needed in the package
 node_modules

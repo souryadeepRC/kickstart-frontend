@@ -1,25 +1,33 @@
 # 🚀 Kickstart Frontend
 
+
 > A CLI tool to scaffold customizable React component structures, instantly.
 
-![npm](https://img.shields.io/npm/v/kickstart-ui)  
-![License](https://img.shields.io/badge/license-MIT-blue.svg)  
-![Node Version](https://img.shields.io/badge/node-%3E=14.0.0-green.svg)
+![npm](https://img.shields.io/npm/v/kickstart-ui)  ![License](https://img.shields.io/badge/license-MIT-blue.svg)  ![Node Version](https://img.shields.io/badge/node-%3E=14.0.0-green.svg)
 
 ---
 
 ## 📦 Installation
 
+Install at specific project
 ```bash
-    npm install kickstart-frontend
-    npm install -g kickstart-frontend
+npm install kickstart-frontend 
 ```
 
+OR 
+
+Install globally
+```bash
+npm install -g kickstart-frontend
+```
 ### Using NPX (recommended)
 
 ```bash
 npx create-react-component
-# or
+```
+OR 
+
+```bash
 npx crc
 ```
 
@@ -40,13 +48,13 @@ npx crc
 
 ## 🛠️ Usage
 ```bash
-    npx create-react-component
+npx create-react-component
 ```
 You will be prompted for:
 
 - Component name
 - Target location (default: src/components)
-- Language (JS/TS)
+- Language (JavaScript / TypeScript)
 - Styling options (CSS / SCSS / SCSS Module)
 
 ## 📁 Output Example
@@ -58,16 +66,22 @@ You will be prompted for:
 - Style: SCSS Module
 
 ### It generates:
-
- 
 ```bash 
-
 src/
 └── components/
     └── PostCard/
         ├── PostCard.tsx
         └── PostCard.module.scss
 ```
+
+## Demo
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+
+For Duplicate scenarios
+![alt text](image-4.png)
 
 ## ✨ Aliases
 You can use either of the following commands:
